@@ -11,9 +11,13 @@ def index(request):
 
 def chef(request, name=None):
     selected_chef = Chef.objects.get(name=name)
+    chef_recipes = Recipe.objects.filter(chef=selected_chef)
     return render(request,
                   'chef.html',
-                  {'chef': selected_chef})
+                  {
+                      'chef': selected_chef,
+                      'recipes': chef_recipes
+                  })
 
 
 def recipe(request, recipe_id=None):
