@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{{ recipe.title }}</title>
+    </head>
+    <body>
+        <a href={% url 'index' %}>Home</a>
+        <h1>{{ recipe.title }}</h1>
+        Submitted By: <a href='../chef/{{ recipe.chef.name }}'>{{ recipe.chef.name }}</a>
+        <h4>Cook Time: {{ recipe.time_required }}</h4>
+        <h4>Description</h4>
+        {{ recipe.description }}
+        <h4>Instructions</h4>
+        {{ recipe.instructions }}
+    </body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Recipe Box</title>
+    </head>
+    <body>
+        <h1>Recipe Box</h1>
+        <h3>All your favorite recipes in one place!</h3>
+        <a href="{% url 'index' %}">Home</a>
+        <h4>Recipes</h4>
+        {% for recipe in recipe_list %}
+            <div class='recipeLink'>
+                <a href='recipe/{{ recipe.id }}'>{{ recipe.title }}</a> | Chef: <a href='chef/{{ recipe.chef.name }}'>{{ recipe.chef.name }}</a>
+            </div>
+        {% endfor %}
+    </body>
+</html>
