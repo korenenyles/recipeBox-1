@@ -10,10 +10,10 @@
         <h3>All your favorite recipes in one place!</h3>
         <a href="{% url 'index' %}">Home</a>
         <h4>Recipes</h4>
-        <ul>
         {% for recipe in recipe_list %}
-            <li>{{recipe.title}}</li>
+            <div class='recipeLink'>
+                <a href='recipe/{{ recipe.id }}'>{{ recipe.title }}</a> | Chef: <a href='chef/{{ recipe.chef.name }}'>{{ recipe.chef.name }}</a>
+            </div>
         {% endfor %}
-        <ul>
     </body>
 </html>
