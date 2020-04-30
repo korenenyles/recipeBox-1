@@ -11,5 +11,9 @@
     <h2>{{ chef.name }}</h2>
     <h4>Biography</h4>
     <p>{{ chef.bio }}</p>
+    <h4>Published Recipes</h4>
+    {% for recipe in recipes %}
+        <a href='../recipe/{{ recipe.id }}'>{{ recipe.title }}</a><br>
+    {% endfor %}
     </body>
 </html>
