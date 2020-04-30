@@ -8,7 +8,7 @@
     <body>
         <a href={% url 'index' %}>Home</a>
         <h1>{{ recipe.title }}</h1>
-        Submitted By: <a href='../chef/{{ recipe.chef.name }}'>{{ recipe.chef.name }}</a>
+        Submitted By: <a href='../chefs/{{ recipe.chef.id }}'>{{ recipe.chef.name }}</a>
         <h4>Cook Time: {{ recipe.time_required }}</h4>
         <h4>Description</h4>
         {{ recipe.description }}

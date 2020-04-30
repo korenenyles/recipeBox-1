@@ -12,7 +12,7 @@
         <h4>Recipes</h4>
         {% for recipe in recipe_list %}
             <div class='recipeLink'>
-                <a href='recipe/{{ recipe.id }}'>{{ recipe.title }}</a> | Chef: <a href='chef/{{ recipe.chef.name }}'>{{ recipe.chef.name }}</a>
+                <a href='recipes/{{ recipe.id }}'>{{ recipe.title }}</a>
             </div>
         {% endfor %}
     </body>
