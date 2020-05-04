@@ -6,9 +6,11 @@
         <title>Recipe Box</title>
     </head>
     <body>
+        <a href="{% url 'index' %}">Home</a>
+        <a href={% url 'new_chef' %}>New Chef</a>
+        <a href={% url 'new_recipe' %}>New Recipe</a>
         <h1>Recipe Box</h1>
         <h3>All your favorite recipes in one place!</h3>
-        <a href="{% url 'index' %}">Home</a>
         <h4>Recipes</h4>
         {% for recipe in recipe_list %}
             <div class='recipeLink'>
