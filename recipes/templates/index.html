@@ -9,8 +9,20 @@
         <a href="{% url 'index' %}">Home</a>
         <a href={% url 'new_chef' %}>New Chef</a>
         <a href={% url 'new_recipe' %}>New Recipe</a>
+        
+        {% if current_user %}
+        <a href={% url 'user_logout' %}>Logout</a>
+        {% else %}
+        <a href={% url 'user_login' %}>Login</a>
+        {% endif %}
+
         <h1>Recipe Box</h1>
         <h3>All your favorite recipes in one place!</h3>
+
+        {% if current_user %}
+        <p>Welcome back, <strong>{{ current_user }}</strong></p>
+        {% endif %}
+
         <h4>Recipes</h4>
         {% for recipe in recipe_list %}
             <div class='recipeLink'>
