@@ -51,8 +51,11 @@ def chef_add(request):
         form = ChefAddForm(data=request.POST)
         if form.is_valid():
             data = form.cleaned_data
+
+            # create new user and new Chef
             new_user = User.objects.create_user(
                 username=data['username'], password=data['password'])
+            new_user.save()
             new_chef = Chef(
                 name=data['name'],
                 bio=data['bio'],
