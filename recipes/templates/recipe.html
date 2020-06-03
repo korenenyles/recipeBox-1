@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -8,11 +9,28 @@
     <body>
         <a href={% url 'index' %}>Home</a>
         <h1>{{ recipe.title }}</h1>
-        Submitted By: <a href='../chefs/{{ recipe.chef.id }}'>{{ recipe.chef.name }}</a>
+        Submitted By: <a href='/chefs/{{ recipe.chef.id }}/'>{{ recipe.chef.name }}</a>
         <h4>Cook Time: {{ recipe.time_required }}</h4>
-        <h4>Description</h4>
+        <h4>Description:</h4>
         {{ recipe.description }}
-        <h4>Instructions</h4>
+        <h4>Instructions:</h4>
         {{ recipe.instructions }}
+        <p><h1>{{current_chef}}</h1></p>
+        
+        {% if request.user.is_authenticated%}
+        
+
+        {% if recipe not in current_chef %}
+        <a href={% url 'favorite' id=recipe.id%}><button>Favorite</button></a>
+        {% else %}
+        <a href= {% url 'unfavorite' id=recipe.id%}><button>Unfavorite</button></a>
+        {% endif %}
+        
+        {%endif%}
+
+        {%comment %} matt perry suggested the if statement {%endcomment%}
+        {%if request.user.chef == recipe.chef or request.user.is_staff%}
+        <a href = {% url 'edit' recipe_id=recipe.id%}><button>Edit</button></a>
+        {%endif%}
     </body>
 </html>

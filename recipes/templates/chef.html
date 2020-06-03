@@ -13,7 +13,11 @@
     <p>{{ chef.bio }}</p>
     <h4>Published Recipes</h4>
     {% for recipe in recipes %}
-        <a href='../recipes/{{ recipe.id }}'>{{ recipe.title }}</a><br>
+        <a href='/recipes/{{ recipe.id }}/'>{{ recipe.title }}</a><br>
     {% endfor %}
+    <h4>Favorites:</h4>
+    {% for favorite in chef.favorites.all%}
+     <p>{{favorite}}</p>
+    {%endfor%}
     </body>
 </html>

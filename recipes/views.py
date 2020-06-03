@@ -38,9 +38,15 @@ def chefs(request, chef_id=None):
 
 def recipes(request, recipe_id=None):
     selected_recipe = Recipe.objects.get(id=recipe_id)
+    
+    if request.user.is_authenticated:
+        current_chef = request.user.chef.favorites.all()
+        return render(request, 'recipe.html',
+                  {'recipe': selected_recipe, 'current_chef':current_chef})
     return render(request,
                   'recipe.html',
-                  {'recipe': selected_recipe})
+                  {'recipe': selected_recipe,})
+
 
 
 @login_required
@@ -149,3 +155,41 @@ def user_login(request):
 def user_logout(request):
     logout(request=request)
     return HttpResponseRedirect(reverse('index'))
+
+def edit_recipe(request, recipe_id):
+    recipe = Recipe.objects.get(id=recipe_id)
+    if request.method == "POST":
+        form = RecipeAddForm(request.POST)
+        if request.user.chef == recipe.chef or request.user.is_staff:
+            if form.is_valid():
+                data = form.cleaned_data
+                recipe.title = data['title']
+                recipe.chef = data['chef']
+                recipe.description = data['description']
+                recipe.time_required = data['time_required']
+                recipe.instructions = data['instructions']
+                recipe.save()
+                return HttpResponseRedirect(reverse('recipes', args=(recipe_id,)))
+        
+    form = RecipeAddForm(initial={
+        'title':recipe.title,
+        'chef':recipe.chef,
+        'description': recipe.description,
+        'time_required':recipe.time_required,
+        'instructions':recipe.instructions
+    })
+    return render(request, 'gen_form.html', {'form': form, 'button_value': 'Submit'})
+@login_required
+def favorite_view(request, id):
+    current_user = request.user.chef
+    favorite_recipe = Recipe.objects.get(id=id)
+    current_user.favorites.add(favorite_recipe)
+    current_user.save()
+    return HttpResponseRedirect(reverse('recipes', kwargs={'recipe_id':id,}))
+@login_required
+def unfavorite_view(request, id):
+    current_user = request.user.chef
+    favorite_recipe = Recipe.objects.get(id=id)
+    current_user.favorites.remove(favorite_recipe)
+    current_user.save()
+    return HttpResponseRedirect(reverse('recipes', kwargs={'recipe_id':id,}))
