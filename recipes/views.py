@@ -25,14 +25,16 @@ def index(request):
                   })
 
 
-def chefs(request, chef_id=None):
+def chefs(request, chef_id=None, id=None):
+    recipes = Recipe.objects.all()
     selected_chef = Chef.objects.get(id=chef_id)
     chef_recipes = Recipe.objects.filter(chef=selected_chef)
     return render(request,
                   'chef.html',
                   {
+                      'recipes': recipes,
                       'chef': selected_chef,
-                      'recipes': chef_recipes
+                      'chef_recipes': chef_recipes
                   })
 
 

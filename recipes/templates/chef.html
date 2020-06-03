@@ -16,8 +16,8 @@
         <a href='/recipes/{{ recipe.id }}/'>{{ recipe.title }}</a><br>
     {% endfor %}
     <h4>Favorites:</h4>
-    {% for favorite in chef.favorites.all%}
-     <p>{{favorite}}</p>
+    {% for recipe in chef.favorites.all%}
+     <a href = {%url 'recipes' recipe_id=recipe.id%}>{{recipe.title}}</a>
     {%endfor%}
     </body>
 </html>
