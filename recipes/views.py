@@ -51,7 +51,8 @@ def recipes(request, recipe_id=None):
 
 
 
-@login_required
+
+
 def chef_add(request):
 
     # POST request handling
